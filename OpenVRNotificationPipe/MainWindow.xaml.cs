@@ -21,6 +21,7 @@ using OpenTK_Animation_Testing;
 using Valve.VR;
 using System.IO;
 using System.Windows.Forms;
+using System.Windows.Threading;
 using BOLL7708;
 using OpenTK;
 using OpenVRNotificationPipe.Notification;
@@ -139,11 +140,11 @@ namespace OpenVRNotificationPipe
             OpenTKControl.Start(settings);
             _controller.SetPort(_settings.Port);
 
-            if (_settings.LaunchMinimized)
+            this.Loaded += (sender, args) =>
             {
                 WindowState = WindowState.Minimized;
                 ShowInTaskbar = !_settings.Tray;
-            }
+            };
         }
 
         private void LoadSettings()
@@ -230,6 +231,7 @@ namespace OpenVRNotificationPipe
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (_notifyIcon != null) _notifyIcon.Dispose();
+            OpenTKControl.Dispatcher.InvokeShutdown();
         }
         
         // Rendering Variables

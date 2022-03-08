@@ -69,11 +69,11 @@ namespace OpenVRNotificationPipe
                     {
                         case SuperServer.ServerStatus.Connected:
                             label_ServerStatus.Background = Brushes.OliveDrab;
-                            label_ServerStatus.Content = "Connected";
+                            label_ServerStatus.Content = "Online";
                             break;
                         case SuperServer.ServerStatus.Disconnected:
                             label_ServerStatus.Background = Brushes.Tomato;
-                            label_ServerStatus.Content = "Disconnected";
+                            label_ServerStatus.Content = "Offline";
                             break;
                         case SuperServer.ServerStatus.Error:
                             label_ServerStatus.Background = Brushes.Gray;
@@ -136,6 +136,10 @@ namespace OpenVRNotificationPipe
                 textBox_Port.Text = _settings.Port.ToString();
                 _controller.SetPort(_settings.Port);
             }
+        }
+
+        private void Button_Editor_Click(object sender, RoutedEventArgs e) {
+            Process.Start("editor.html");
         }
         
         private void ClickedURL(object sender, RoutedEventArgs e)

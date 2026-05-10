@@ -167,6 +167,7 @@ namespace OpenVRNotificationPipe
             _server.StatusAction = serverStatus;
             _server.MessageReceievedAction = (session, payloadJson) =>
             {
+                Debug.WriteLine(payloadJson);
                 if (!Session.Sessions.ContainsKey(session.SessionID)) {
                     Session.Sessions.TryAdd(session.SessionID, session);
                 }
